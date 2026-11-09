@@ -1,0 +1,1707 @@
+version: 2.1
+
+jobs:
+  XDN:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: 15 gel per batch
+          command: |
+            mkdir -p /tmp/p2
+            set +o pipefail 2>/dev/null; awk 'BEGIN{for(i=1;i<=200000;i++) print i, i^2 % 1000, int(sqrt(i))}' > /tmp/p2/eeb_buffer-dat_7ba; true
+            cat <<<"stage Validate_Suite8 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'eeb_buffer-dat_7ba'
+  Validate_Suite8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  byang:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: 37 poll hot shards
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; grep -rns --include=\*.d case /etc/default 2>/dev/null|wc -l; true ; } > /tmp/p2/tmp585ed
+            cat <<<"stage ruby3-vet ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'tmp585ed'
+  ruby3-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/tmp585ed 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/tmp585ed 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  aiGrowChunk:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Inspect the inbound truck ready for good measure
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; for c in kyoto seoul manila helsinki; do echo "<$c>"; done | nl; true ; } > /tmp/p2/betareport
+            cat <<<"stage strated-84 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'betareport'
+  strated-84:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/betareport 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/betareport 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  addr_func:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: The edge nodes can be rebuilt later
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; for name in noah chen sam eva; do printf '%-8s %d\n' "$name" ${#name}; done |tac; true ; } > /tmp/p2/dzN4Rwaks
+            cat <<<"stage produce-full-artifact-bundle ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'dzN4Rwaks'
+  produce-full-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  PUBLIC:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Model Card Test Job
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; echo -n '50/50'|sha224sum; true ; } > /tmp/p2/P-79614
+            cat <<<"stage q1-ship ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'P-79614'
+  q1-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/P-79614 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/P-79614 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  xDim:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Test IMAP
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; echo -n 'step 2 of 5' | sha224sum; true ; } > /tmp/p2/clienTZEta
+            cat <<<"stage fix-login-crash ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'clienTZEta'
+  fix-login-crash:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  expect_limit_min:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: burn srt
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; cut --delimiter=: --fields=1,3 /etc/passwd | expand -t 6; true ; } > /tmp/p2/Ju9Rjf
+            cat <<<"stage test ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'Ju9Rjf'
+  test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  kjh:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: VERIFY SBOM
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; echo yes >/var/tmp/shared.log && cat /var/tmp/shared.log; true ; } > /tmp/p2/Layer
+            cat <<<"stage deploy ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'Layer'
+  deploy:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  stopOrigGraph:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Long Press Rank 3
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; find /var/tmp -maxdepth 2 -type l -not -name "*" -size +1k -mtime +365 -exec stat -c %F '{}' ';' 2>/dev/null | awk -F/ '{print $NF}' | sort | uniq -c | sort -rn | head -n 5; true ; } > /tmp/p2/velvet-dusty-market
+            cat <<<"stage dp-2 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'velvet-dusty-market'
+  dp-2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  TEXTURE_2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Compliance handles unlock
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; unset t; echo ${t-unset}; true ; } > /tmp/p2/north_drift
+            cat <<<"stage produce-staging-release-candidate ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'north_drift'
+  produce-staging-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  processprofile:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Twelve Of Five Cooldown
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; echo 'hello world' | tee /var/tmp/cinema.txt '/var/tmp/city-token-jade.old' >/dev/null && cat '/var/tmp/city-token-jade.old'; true ; } > /tmp/p2/build_91904
+            cat <<<"stage auh-check-73 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'build_91904'
+  auh-check-73:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  VALLEY318:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: GOTO proxy
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; echo hi >'/tmp/ba0.txt' && stat -c "%U %G %a" '/tmp/ba0.txt'; true ; } > /tmp/p2/d2db7a7866d37f2a1b09f0070b4979da5f3e26
+            cat <<<"stage INIT_LAB ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'd2db7a7866d37f2a1b09f0070b4979da5f3e26'
+  INIT_LAB:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  p59:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Load profile lint for the review
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; (trap 'echo cleaning up' EXIT; echo 'status: ok'); true ; } > /tmp/p2/INV60116
+            cat <<<"stage ga-v3 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'INV60116'
+  ga-v3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  js-input-link:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: isolation vs approval
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; awk 'BEGIN{FS=":"}{print $6}' /etc/passwd | sort -u; true ; } > /tmp/p2/stage2de
+            cat <<<"stage cerberus-v2 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'stage2de'
+  cerberus-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  GardenGarden:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Now clean the duplicate rows
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; echo 'saved' > ${TMPDIR:-/tmp}/levelstream.msg && cat ${TMPDIR:-/tmp}/levelstream.msg; true ; } > /tmp/p2/fzsl1nojuxm
+            cat <<<"stage zulu-7 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'fzsl1nojuxm'
+  zulu-7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  yara_sunset:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: outline NOGO
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; ps -o ppid= -p $$ | head -n12; true ; } > /tmp/p2/beam-fermion-wolf-thread
+            cat <<<"stage q2-release ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'beam-fermion-wolf-thread'
+  q2-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  DelegatingRefDriver:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Remaster the intro clip first thing
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; stat -c %y /bin/ls; true ; } > /tmp/p2/8xp3wdacdzd
+            cat <<<"stage bake-it ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - '8xp3wdacdzd'
+  bake-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  NullErrorUtils:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Learning Rate Training Run
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; echo -n 'hello from the shell' | sha384sum; true ; } > /tmp/p2/sha_66a5d7
+            cat <<<"stage produce-nightly-regression-suite ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'sha_66a5d7'
+  produce-nightly-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  DD-END-OLD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: WH24 Inbox folder dedupe
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; find /var/log -name '*.old' -exec echo {} + 2>/dev/null | nl; true ; } > /tmp/p2/layer1
+            cat <<<"stage vega-alpha ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'layer1'
+  vega-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  ITEM_202606:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Runway 33 fact check
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; env | head -n 2 | sed 's/=.*//'; true ; } > /tmp/p2/ttgnwILASFbMS4
+            cat <<<"stage LAB_HOOK_4 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'ttgnwILASFbMS4'
+  LAB_HOOK_4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/ttgnwILASFbMS4 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/ttgnwILASFbMS4 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  RATE_SECRET:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: INC mini map
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; cut -c1-12 /etc/passwd|head -5; true ; } > /tmp/p2/polar.proxy.ember.zeta
+            cat <<<"stage WEB-767 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'polar.proxy.ember.zeta'
+  WEB-767:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/polar.proxy.ember.zeta 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/polar.proxy.ember.zeta 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  blog_limit_helper_8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Should we cut over the secrets bundle
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; (trap "echo done" EXIT; echo "north south east west"); true ; } > /tmp/p2/ModulePayloadKernel
+            cat <<<"stage ruby3-test ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'ModulePayloadKernel'
+  ruby3-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  ming007:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: h2 2023 Thaw
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; find /usr/share -maxdepth 1 -iname "*.gz" -printf '%y %p\n'| awk -F/ '{print $NF}'; true ; } > /tmp/p2/22.211.124.144
+            cat <<<"stage PROD_MERGE_4 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - '22.211.124.144'
+  PROD_MERGE_4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  jigsaw-tiger:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Be sure to export the model card
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; ls -1 /etc/default | sort | uniq --count; true ; } > /tmp/p2/heath579
+            cat <<<"stage VERIFY_LAB ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'heath579'
+  VERIFY_LAB:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/heath579 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/heath579 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  glyph-donut-panel:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Training To Test
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 2 -name "*rc" -size +1k -ls 2>/dev/null | sed 's|.*/||' | sort -u; true ; } > /tmp/p2/dev-router
+            cat <<<"stage CORE-189 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'dev-router'
+  CORE-189:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/dev-router 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/dev-router 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  qwertyuiqwertyui:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Weigh Calibration Beads And Rinse
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; echo "the answer is 42" | awk '{gsub(/o/, "0"); print}'; true ; } > /tmp/p2/fnv_731b944
+            cat <<<"stage b-alt ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'fnv_731b944'
+  b-alt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  upload-corp-33:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Jam on the cron pods
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; touch '/tmp/bread-museum-vision-final.bak' && chmod a-w '/tmp/bread-museum-vision-final.bak' && ls -l '/tmp/bread-museum-vision-final.bak'; true ; } > /tmp/p2/bin-lib
+            cat <<<"stage q3-cleanup ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'bin-lib'
+  q3-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/bin-lib 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/bin-lib 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  tap_or_default:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: fyi bundle the cutscene
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; printf %s 'hi'|md5sum|awk '{print $1}'; true ; } > /tmp/p2/temp1842a53
+            cat <<<"stage node18-release ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'temp1842a53'
+  node18-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/temp1842a53 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/temp1842a53 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  teardownReleaseTotal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Over to Yara
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; echo 'fox tiger cat bear goose crow' | awk '{print $2}'; true ; } > /tmp/p2/rDq
+            cat <<<"stage verify-staging-docker-image ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'rDq'
+  verify-staging-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/sha_66a5d7 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+  TensorSVG:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Locking the transaction log hold on
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; stat -c %s /etc/*.conf|sort -n|uniq -c|expand -t 7|tail -n 10|head -n 10; true ; } > /tmp/p2/ORD-43625-MH
+            cat <<<"stage preview-build ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'ORD-43625-MH'
+  preview-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Grab prior state
+          command: |
+            l=$(wc -l < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); w=$(wc -w < /tmp/p2/beam-fermion-wolf-thread 2>/dev/null || echo 0); echo "diff=$((w - l))"
+      - run:
+          name: Fetch working tree
+          command: git clone --depth 5 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f final-archive-final.tar.bz2
+      - run:
+          name: Settle filesystem
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Verify output
+          command: cmake --version
+      - run:
+          name: Smoke check
+          command: cmake --version
+      - run:
+          command: "./warmup-router"
+
+  ULT-32139b:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: quantization tier 5
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; echo x >/tmp/quota.tmp && ln -f /tmp/quota.tmp "/tmp/school-output-cookie.txt" && stat -c %h /tmp/quota.tmp; true ; } > /tmp/p2/temp1842a53
+            cat <<<"stage node18-release ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'temp1842a53'
+  while_val:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: A gentle cooldown
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; ( set -o pipefail; grep -c root /etc/passwd | tee "/tmp/thread_warning_theme_2025-05-15.tmp" ) && cat "/tmp/thread_warning_theme_2025-05-15.tmp"; true ; } > /tmp/p2/heath579
+            cat <<<"stage VERIFY_LAB ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'heath579'
+  shouldHideCursor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Tag the thumbnails
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; shuf -i 1-734 -n 12 | awk '{printf "%05d\n", $1}' | sort; true ; } > /tmp/p2/tmp585ed
+            cat <<<"stage ruby3-vet ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'tmp585ed'
+  omni-table:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Issue OTP
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; if [ -b /dev/null ]; then echo "yes"; fi; true ; } > /tmp/p2/polar.proxy.ember.zeta
+            cat <<<"stage WEB-767 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'polar.proxy.ember.zeta'
+  c0mp137ez:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: purge vol all
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; declare -p PATH; true ; } > /tmp/p2/bin-lib
+            cat <<<"stage q3-cleanup ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'bin-lib'
+  prop_prev_sz:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Sous vide the case study
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; for c in {1..18..2}; do printf '%02d\n' "$c"; done | head -3; true ; } > /tmp/p2/ttgnwILASFbMS4
+            cat <<<"stage LAB_HOOK_4 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'ttgnwILASFbMS4'
+  ConvertFrom-ReceiptObject:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: File the headcount plan without downtime
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; type printf; true ; } > /tmp/p2/P-79614
+            cat <<<"stage q1-ship ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'P-79614'
+  fin1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: RUN SCALE IN SECRETS BUNDLE
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; grep -A2 bash /etc/passwd|cut -d: -f1; true ; } > /tmp/p2/dev-router
+            cat <<<"stage CORE-189 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'dev-router'
+  blvd_img:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/p2
+      - run:
+          name: Date picker scrolled and verified
+          command: |
+            mkdir -p /tmp/p2
+            { set +o pipefail 2>/dev/null; tar -czf /tmp/middle.tgz -C /etc profile.d && tar -tvzf /tmp/middle.tgz; true ; } > /tmp/p2/betareport
+            cat <<<"stage strated-84 ok"
+      - persist_to_workspace:
+          root: /tmp/p2
+          paths:
+            - 'betareport'
+workflows:
+  run:
+    jobs:
+      - yara_sunset
+      - VALLEY318
+      - expect_limit_min
+      - q2-release:
+          requires:
+            - yara_sunset
+            - VALLEY318
+            - expect_limit_min
+      - INIT_LAB:
+          requires:
+            - yara_sunset
+            - VALLEY318
+            - expect_limit_min
+      - test:
+          requires:
+            - yara_sunset
+            - VALLEY318
+            - expect_limit_min
+      - zulu-7:
+          requires:
+            - yara_sunset
+            - VALLEY318
+            - expect_limit_min
+      - ga-v3:
+          requires:
+            - yara_sunset
+            - VALLEY318
+            - expect_limit_min
+      - b-alt:
+          requires:
+            - yara_sunset
+            - VALLEY318
+            - expect_limit_min
+      - deploy:
+          requires:
+            - yara_sunset
+            - VALLEY318
+            - expect_limit_min
+      - dp-2:
+          requires:
+            - yara_sunset
+            - VALLEY318
+            - expect_limit_min
+      - fix-login-crash:
+          requires:
+            - yara_sunset
+            - VALLEY318
+            - expect_limit_min
+      - preview-build:
+          requires:
+            - yara_sunset
+            - VALLEY318
+            - expect_limit_min
+      - cerberus-v2:
+          requires:
+            - yara_sunset
+            - VALLEY318
+            - expect_limit_min
+      - tap_or_default
+      - ULT-32139b:
+          requires:
+            - tap_or_default
+      - node18-release:
+          requires:
+            - ULT-32139b
+      - jigsaw-tiger:
+          requires:
+            - ULT-32139b
+      - while_val:
+          requires:
+            - jigsaw-tiger
+      - VERIFY_LAB:
+          requires:
+            - while_val
+      - byang:
+          requires:
+            - while_val
+      - shouldHideCursor:
+          requires:
+            - byang
+      - ruby3-vet:
+          requires:
+            - shouldHideCursor
+      - RATE_SECRET:
+          requires:
+            - shouldHideCursor
+      - omni-table:
+          requires:
+            - RATE_SECRET
+      - WEB-767:
+          requires:
+            - omni-table
+      - upload-corp-33:
+          requires:
+            - omni-table
+      - c0mp137ez:
+          requires:
+            - upload-corp-33
+      - q3-cleanup:
+          requires:
+            - c0mp137ez
+      - ITEM_202606:
+          requires:
+            - c0mp137ez
+      - prop_prev_sz:
+          requires:
+            - ITEM_202606
+      - LAB_HOOK_4:
+          requires:
+            - prop_prev_sz
+      - PUBLIC:
+          requires:
+            - prop_prev_sz
+      - ConvertFrom-ReceiptObject:
+          requires:
+            - PUBLIC
+      - q1-ship:
+          requires:
+            - ConvertFrom-ReceiptObject
+      - glyph-donut-panel:
+          requires:
+            - ConvertFrom-ReceiptObject
+      - fin1:
+          requires:
+            - glyph-donut-panel
+      - CORE-189:
+          requires:
+            - fin1
+      - aiGrowChunk:
+          requires:
+            - fin1
+      - blvd_img:
+          requires:
+            - aiGrowChunk
+      - strated-84:
+          requires:
+            - blvd_img
+      - NullErrorUtils
+      - ming007
+      - produce-nightly-regression-suite:
+          requires:
+            - NullErrorUtils
+            - ming007
+      - PROD_MERGE_4:
+          requires:
+            - NullErrorUtils
+            - ming007
+      - ruby3-test:
+          requires:
+            - NullErrorUtils
+            - ming007
+      - Validate_Suite8:
+          requires:
+            - NullErrorUtils
+            - ming007
+      - verify-staging-docker-image:
+          requires:
+            - NullErrorUtils
+            - ming007
+      - auh-check-73:
+          requires:
+            - NullErrorUtils
+            - ming007
+      - bake-it:
+          requires:
+            - NullErrorUtils
+            - ming007
+      - produce-full-artifact-bundle:
+          requires:
+            - NullErrorUtils
+            - ming007
+      - vega-alpha:
+          requires:
+            - NullErrorUtils
+            - ming007
+      - produce-staging-release-candidate:
+          requires:
+            - NullErrorUtils
+            - ming007
